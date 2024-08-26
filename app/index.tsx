@@ -1,15 +1,8 @@
-import { Text, View } from "react-native";
-import {GetStart} from "@/app/Screens/GetStart";
-import Login from "./Screens/Login";
-import Signup from "./Screens/Signup";
+import React from "react";
+import AppNavigation from "./Screens/AppNavigation";
 
 export default function Index() {
   return ( 
-    <View className="flex-1">
-        <GetStart/>
-        {/* <Login/> */}
-        {/* <Signup/> */}
-
-    </View>
+    <AppNavigation />
   );
 }

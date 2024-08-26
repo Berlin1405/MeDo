@@ -1,22 +1,18 @@
-import react from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import GetStart from './app/Screens/GetStart';
-import SignUp from './app/Screens/SignUp';
-import Login from './app/Screens/Login';
-
-
+import GetStart from './GetStart';
+import SignUp from './Signup';
+import Login from './Login';
 const Stack = createStackNavigator();
 
-export function AppNavigation() {
+export default function AppNavigation() {
     return (
-        <NavigationContainer>
+        <NavigationContainer independent={true}>
             <Stack.Navigator initialRouteName="GetStart">
                 <Stack.Screen name="GetStart" options={{headerShown:false}} component={GetStart} />
                 <Stack.Screen name="SignUp" options={{headerShown:false}} component={SignUp} />
                 <Stack.Screen name="Login" options={{headerShown:false}} component={Login} />
             </Stack.Navigator>
-
         </NavigationContainer>
     )
 }
