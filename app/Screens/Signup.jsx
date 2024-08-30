@@ -1,13 +1,40 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function SignUp() {
+const SignUp = () => {
     const navigation = useNavigation();
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [mobile, setMobile] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = () => {
+        if (!email || !password) {
+            setError('Email and password are required.');
+            return;
+        }
+
+        setLoading(true);
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                // Optionally save user info
+                AsyncStorage.setItem('user', JSON.stringify(user));
+                navigation.navigate('Success');
+            })
+            .catch((error) => {
+                setError(error.message);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
 
     return (
         <View className="flex-1 bg-white" style={{ backgroundColor: '#4F86F7' }}>
@@ -31,28 +58,14 @@ export default function SignUp() {
                 className="flex-1 bg-white px-5 pt-5"
                 style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
             >
-                <Text className="text-gray-700 ml-4 p-2">Full Name :</Text>
-                <TextInput
-                    className="p-4 bg-gray-100 rounded-2xl mb-3"
-                    value={name}
-                    onChangeText={setName}
-                    placeholder="Enter your Full Name"
-                />
-                <Text className="text-gray-700 ml-4 p-2">Mobile Number :</Text>
-                <TextInput
-                    className="p-4 bg-gray-100 rounded-2xl mb-3"
-                    value={mobile}
-                    onChangeText={setMobile}
-                    placeholder="Enter your Mobile Number"
-                />
-                <Text className="text-gray-700 ml-4 p-2">Enter  Address :</Text>
+                <Text className="text-gray-700 ml-4 p-2">Enter Address:</Text>
                 <TextInput
                     className="p-4 bg-gray-100 rounded-2xl mb-3"
                     value={email}
                     onChangeText={setEmail}
                     placeholder="Enter your Email"
                 />
-                <Text className="text-gray-700 ml-4 p-2">Password :</Text>
+                <Text className="text-gray-700 ml-4 p-2">Password:</Text>
                 <TextInput
                     className="p-4 bg-gray-100 rounded-2xl mb-3"
                     value={password}
@@ -60,17 +73,23 @@ export default function SignUp() {
                     placeholder="Enter your Password"
                     secureTextEntry
                 />
-
                 <TouchableOpacity
-                    className="bg-zinc-900 p-4 rounded-2xl mx-4"
-                    onPress={() => navigation.navigate('Home')}
+                    style={{
+                        backgroundColor: '#1F2937',
+                        padding: 16,
+                        borderRadius: 20,
+                        marginHorizontal: 16,
+                    }}
+                    onPress={handleChange}
                 >
-                    <Text className="text-white text-center font-bold">Sign Up</Text>
+                    <Text style={{ color: '#FFFFFF', textAlign: 'center', fontWeight: 'bold' }}>
+                        Sign Up
+                    </Text>
                 </TouchableOpacity>
-                
-               
-               
+                {error && <Text style={{ color: 'red' }}>{error}</Text>}
             </View>
         </View>
     );
 }
+
+export default SignUp;

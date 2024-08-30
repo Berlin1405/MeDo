@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
-export function GetStart() {
+const GetStart=()=> {
     const navigation = useNavigation();
 
     return (
@@ -33,7 +33,7 @@ export function GetStart() {
                                 Already have an account?
                             </Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                                <Text className="font-semibold text-zinc-900"> Sign In</Text>
+                                <Text className="font-semibold text-zinc-900"> Login</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -42,3 +42,4 @@ export function GetStart() {
         </View>
     );
 }
+export default GetStart;

@@ -1,11 +1,62 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from './firebaseConfig';
+// import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+// import { signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 
-export default function Login() {
+const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  
+
+
+  
+
+  const handleLogin = () => {
+    if (!email || !password) {
+      setError("Email and password cannot be empty.");
+      return;
+    }
+
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigation.navigate('Success'); // Navigate after successful login
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleForgotPassword = () => {
+    if (!email) {
+      setError('Please enter your email address.');
+      return;
+    }
+
+    setLoading(true);
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log('Password reset email sent!');
+        setError('Password reset email sent! Check your inbox.');
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <View className="flex-1 bg-white" style={{ backgroundColor: '#4F86F7' }}>
@@ -29,14 +80,14 @@ export default function Login() {
         className="flex-1 bg-white px-5 pt-5"
         style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
       >
-        <Text className="text-gray-700 ml-4 p-2">Email Address :</Text>
+        <Text className="text-gray-700 ml-4 p-2">Email Address:</Text>
         <TextInput
           className="p-4 bg-gray-100 rounded-2xl mb-3"
           value={email}
           onChangeText={setEmail}
           placeholder="Enter your Email"
         />
-        <Text className="text-gray-700 ml-4 p-2">Password :</Text>
+        <Text className="text-gray-700 ml-4 p-2">Password:</Text>
         <TextInput
           className="p-4 bg-gray-100 rounded-2xl mb-3"
           value={password}
@@ -44,20 +95,34 @@ export default function Login() {
           placeholder="Enter your Password"
           secureTextEntry
         />
-        <TouchableOpacity className="flex items-end p-5">
+        <TouchableOpacity className="flex items-end p-5" onPress={handleForgotPassword}>
           <Text className="text-gray-700">Forgot Password?</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          className="bg-zinc-900 p-4 rounded-2xl mx-4"
-          onPress={() => navigation.navigate('Home')}
+          style={{
+            backgroundColor: '#1F2937',
+            padding: 16,
+            borderRadius: 20,
+            marginHorizontal: 16,
+          }}
+          onPress={handleLogin}
         >
-          <Text className="text-white text-center font-bold">Log In</Text>
+          <Text style={{ color: '#FFFFFF', textAlign: 'center', fontWeight: 'bold' }}>
+            Login
+          </Text>
         </TouchableOpacity>
-      <Text className="text-center text-gray-700 font-bold py-5">
-        Or
+        {error && <Text style={{ color: 'red' }}>{error}</Text>}
+        <Text className="text-center text-gray-700 font-bold py-5">
+          Or
         </Text>
         <View className="flex-row justify-center space-x-12">
-          <TouchableOpacity className="p-2 bg-gray-50 rounded-2xl">
+        <TouchableOpacity  style={{ padding: 8, backgroundColor: '#f5f5f5', borderRadius: 16 }}>
+    <Image
+      source={require('./../../assets/images/google.png')}
+      style={{ width: 40, height: 40 }}
+    />
+  </TouchableOpacity>
+          {/* <TouchableOpacity className="p-2 bg-gray-50 rounded-2xl">
             <Image
               source={require('./../../assets/images/google.png')}
               style={{ width: 40, height: 40 }}
@@ -68,22 +133,17 @@ export default function Login() {
               source={require('./../../assets/images/google.png')}
               style={{ width: 40, height: 40 }}
             />
-          </TouchableOpacity>
-          <TouchableOpacity className="p-2 bg-gray-50 rounded-2xl">
-            <Image
-              source={require('./../../assets/images/google.png')}
-              style={{ width: 40, height: 40 }}
-            />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View className="flex-row justify-center mt-7">
           <Text className="text-gray-700">Don't have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <TouchableOpacity onPress={() => navigation.navigate('GetStart')}>
             <Text className="text-cyan-500"> Sign Up</Text>
           </TouchableOpacity>
         </View>
-  
       </View>
     </View>
   );
 }
+
+export default Login;
