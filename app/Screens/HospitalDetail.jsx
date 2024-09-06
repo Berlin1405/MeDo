@@ -1,37 +1,43 @@
-// HospitalDetail.jsx
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
 
-const HospitalDetail = () => {
-  const route = useRoute();
-  const navigation = useNavigation();
+const HospitalDetail = ({ route, navigation }) => {
+  const { hospital } = route.params;
 
-  // Extract parameters from route
-  const { name, marker, rating, vacantBeds, occupiedBeds } = route.params || {};
+  
+  // console.log('Hospital Details:', hospital);
+
+  if (!hospital) {
+    return (
+      <View className="flex-1 justify-center items-center">
+        <Text>No hospital data available</Text>
+      </View>
+    );
+  }
 
   return (
-    <View className="flex-1 bg-white p-4">
-      <TouchableOpacity className="p-2" onPress={() => navigation.goBack()}>
-        <Text className="text-blue-500">Back</Text>
-      </TouchableOpacity>
-
-      <Text className="text-2xl font-bold mb-2">{name}</Text>
-      <Text className="text-gray-500 mb-4">{marker}</Text>
-
-      <View className="bg-blue-100 p-4 rounded-md mb-4">
-        <Text className="text-lg font-bold mb-2">Bed Status</Text>
-        <View className="flex-row justify-between">
-          <View className="items-center">
-            <Text className="text-green-500 text-xl font-bold">{vacantBeds}</Text>
-            <Text className="text-gray-500">Vacant Beds</Text>
-          </View>
-          <View className="items-center">
-            <Text className="text-red-500 text-xl font-bold">{occupiedBeds}</Text>
-            <Text className="text-gray-500">Occupied Beds</Text>
-          </View>
+    <View className="flex-1 bg-blue-200 p-5 justify-center items-center">
+      <Text className="text-xl font-bold mb-2">{hospital.name}</Text>
+      <Text className="text-lg text-gray-700 mb-5">{hospital.location}</Text>
+      <View className="flex-row justify-between w-4/5 mb-5">
+        <View className="items-center">
+          <Text className="text-2xl font-bold text-green-600">{hospital.vacantBeds}</Text>
+          <Text>Vacant Beds</Text>
+        </View>
+        <View className="items-center">
+          <Text className="text-2xl font-bold text-red-600">{hospital.occupiedBeds}</Text>
+          <Text>Occupied Beds</Text>
         </View>
       </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('BookingConfirmation', {
+          hospitalName: hospital.name,
+          patientName: 'Gokul Kanna',
+        })}
+        className="bg-purple-600 py-3 px-10 rounded-md"
+      >
+        <Text className="text-white font-bold text-lg">BOOK NOW</Text>
+      </TouchableOpacity>
     </View>
   );
 };

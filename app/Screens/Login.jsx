@@ -28,7 +28,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate('MainInt'); // Navigate after successful login
+        navigation.navigate('MainInt'); 
       })
       .catch((error) => {
         setError(error.message);

@@ -1,32 +1,27 @@
-// HospitalCard.jsx
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const HospitalCard = ({ name, marker, rating, vacantBeds, occupiedBeds }) => {
+const HospitalCard = ({ name, location, rating, onPress }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity 
-      onPress={() => navigation.navigate('HospitalDetail', {
-        name,
-        marker,
-        rating,
-        vacantBeds,
-        occupiedBeds,
-      })}
-      className="flex-row items-center bg-blue-100 p-4 rounded-md mb-4"
-    >
-      <Image
-        source={require('./../../assets/images/hosbulid.png')}
-        className="w-20 h-20 rounded-md"
-      />
-      <View className="ml-4">
-        <Text className="text-lg font-bold">{name}</Text>
-        <Text className="text-gray-500">{marker}</Text>
-        <View className="flex-row items-center">
-          <Text className="text-yellow-500">⭐ {rating}</Text>
-          <Text className="ml-2 text-gray-500">Reviews</Text>
+    <TouchableOpacity onPress={onPress} className="flex-row justify-between items-center bg-blue-100 p-4 rounded-lg my-2">
+      <View className="flex-1">
+        <Text className="text-lg font-bold text-gray-800">{name}</Text>
+        <Text className="text-base text-gray-600">{location}</Text>
+        <View className="flex-row mt-1">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <Image
+              key={index}
+              source={
+                index < Math.floor(rating)
+                  ? require('./../../assets/images/starfil.png')
+                  : require('./../../assets/images/starun.png')
+              }
+              className="w-4 h-4 mr-1"
+            />
+          ))}
         </View>
       </View>
     </TouchableOpacity>

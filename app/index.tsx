@@ -1,9 +1,11 @@
 import React from "react";
 import AppNavigation from "./Screens/AppNavigation";
-import MainInt from "./Screens/MainInt";
+import BottomTabNavigator from "./Screens/BottomTabNavigator";
+import HomeScreen from "./Screens/HomeScreen";
+
 
 export default function Index() {
   return (
-    <AppNavigation />
+      <AppNavigation /> 
   );
 }
