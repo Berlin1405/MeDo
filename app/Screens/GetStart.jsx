@@ -24,18 +24,24 @@ const GetStart=()=> {
                     <View className="space-y-4">
                         <TouchableOpacity
                             className="py-3 bg-zinc-900 rounded-xl mx-7"
-                            onPress={() => navigation.navigate('SignUp')}
+                            onPress={() => navigation.navigate('AdminLogin')}
                         >
-                            <Text className="text-white text-center font-bold">Sign Up</Text>
+                            <Text className="text-white text-center font-bold">ADMIN</Text>
                         </TouchableOpacity>
-                        <View className="flex-row justify-center">
+                        <TouchableOpacity
+                            className="py-3 bg-zinc-900 rounded-xl mx-7"
+                            onPress={() => navigation.navigate('Login')}
+                        >
+                            <Text className="text-white text-center font-bold">USERS</Text>
+                        </TouchableOpacity>
+                        {/* <View className="flex-row justify-center">
                             <Text className="text-white font-semibold">
                                 Already have an account?
                             </Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                                 <Text className="font-semibold text-zinc-900"> Login</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
             </View>

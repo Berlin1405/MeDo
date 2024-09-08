@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SignUp = () => {
+const AdminSignup = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -88,7 +88,7 @@ const SignUp = () => {
                 </TouchableOpacity>
                 <View className="flex-row justify-center mt-7">
           <Text className="text-gray-700">Already have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity onPress={() => navigation.navigate('AdminLogin')}>
             <Text className="text-cyan-500"> Login </Text>
           </TouchableOpacity>
         </View>
@@ -98,4 +98,4 @@ const SignUp = () => {
     );
 }
 
-export default SignUp;
+export default AdminSignup;

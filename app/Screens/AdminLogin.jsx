@@ -6,10 +6,11 @@ import { auth } from './firebaseConfig';
 // import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 // import { signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 
-const Login = () => {
+const AdminLogin = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [HosId, setHosId] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -95,6 +96,14 @@ const Login = () => {
           placeholder="Enter your Password"
           secureTextEntry
         />
+        <Text className="text-gray-700 ml-4 p-2">Hospital Id:</Text>
+        <TextInput
+          className="p-4 bg-gray-100 rounded-2xl mb-3"
+          value={HosId}
+          onChangeText={setHosId}
+          placeholder="Enter your Hospital Id"
+        />
+        
         <TouchableOpacity className="flex items-end p-5" onPress={handleForgotPassword}>
           <Text className="text-gray-700">Forgot Password?</Text>
         </TouchableOpacity>
@@ -136,8 +145,8 @@ const Login = () => {
           </TouchableOpacity> */}
         </View>
         <View className="flex-row justify-center mt-7">
-          <Text className="text-gray-700">Don't have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text className="text-gray-700">Register Your Hospital</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('AdminSignup')}>
             <Text className="text-cyan-500"> Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -146,4 +155,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default AdminLogin;

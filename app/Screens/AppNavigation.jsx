@@ -8,6 +8,9 @@ import Login from './Login';
 import HospitalDetail from './HospitalDetail';
 import BookingConfirmation from './BookingConfirmation';
 import BookingSuccessScreen from './BookingSuccessScreen';
+import AdminLogin from './AdminLogin';
+import AdminSignup from './AdminSignup';
+
 
 
 const Stack = createStackNavigator();
@@ -24,6 +27,8 @@ const AppNavigation = () => {
         <Stack.Screen name="HospitalDetail" options={{ headerShown: false }} component={HospitalDetail} />
         <Stack.Screen name="BookingConfirmation"  options={{ headerShown: false }} component={BookingConfirmation} />
         <Stack.Screen name="BookingSuccessScreen"  options={{ headerShown: false }} component={BookingSuccessScreen} />
+        <Stack.Screen name="AdminLogin" options={{ headerShown: false }} component={AdminLogin} />
+        <Stack.Screen name="AdminSignup" options={{ headerShown: false }} component={AdminSignup} />
       </Stack.Navigator>
     </NavigationContainer>
   );
