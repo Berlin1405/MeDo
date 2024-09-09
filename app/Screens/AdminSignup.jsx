@@ -9,6 +9,7 @@ const AdminSignup = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [HosId, setHosId] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -73,6 +74,13 @@ const AdminSignup = () => {
                     placeholder="Enter your Password"
                     secureTextEntry
                 />
+        <Text className="text-gray-700 ml-4 p-2">Licence No:</Text>
+        <TextInput
+          className="p-4 bg-gray-100 rounded-2xl mb-3"
+          value={HosId}
+          onChangeText={setHosId}
+          placeholder="Enter your Licence No"
+        />
                 <TouchableOpacity
                     style={{
                         backgroundColor: '#1F2937',
@@ -83,7 +91,7 @@ const AdminSignup = () => {
                     onPress={handleChange}
                 >
                     <Text style={{ color: '#FFFFFF', textAlign: 'center', fontWeight: 'bold' }}>
-                        Sign Up
+                        + Add Hospital
                     </Text>
                 </TouchableOpacity>
                 <View className="flex-row justify-center mt-7">

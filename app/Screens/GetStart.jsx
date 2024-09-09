@@ -5,11 +5,12 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 const GetStart=()=> {
     const navigation = useNavigation();
 
+
     return (
         <View className="flex-1" style={{ backgroundColor: '#4F86F7' }}>
             <View className="flex-1">
                 <View className="flex-1 justify-around my-4">
-                    <Text className="text-white text-center text-4xl font-bold text-center">
+                    <Text className="text-white text-4xl font-bold text-center">
                         MeDo Welcome's You
                     </Text>
                     <Text className="text-white font-bold  text-2xl text-center">

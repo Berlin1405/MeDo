@@ -41,6 +41,7 @@ const BottomTabNavigator = () => {
       <Tab.Screen name="Map" options={{ headerShown: false }} component={MainInt} />
       <Tab.Screen name="Profile" options={{ headerShown: false }} component={MapScreen} />
       <Tab.Screen name="Help Services" options={{ headerShown: false }} component={ProfileScreen} />
+      {/* <Tab.Screen name="" */}
     </Tab.Navigator>
   );
 };

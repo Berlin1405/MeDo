@@ -10,7 +10,10 @@ import BookingConfirmation from './BookingConfirmation';
 import BookingSuccessScreen from './BookingSuccessScreen';
 import AdminLogin from './AdminLogin';
 import AdminSignup from './AdminSignup';
-
+import MapScreen from './MapScreen';
+import AdminProf from './AdminProf'
+import Inventory from './Inventory'
+import Supplier from './Supplier'
 
 
 const Stack = createStackNavigator();
@@ -29,6 +32,10 @@ const AppNavigation = () => {
         <Stack.Screen name="BookingSuccessScreen"  options={{ headerShown: false }} component={BookingSuccessScreen} />
         <Stack.Screen name="AdminLogin" options={{ headerShown: false }} component={AdminLogin} />
         <Stack.Screen name="AdminSignup" options={{ headerShown: false }} component={AdminSignup} />
+        <Stack.Screen name="MapScreen" options={{ headerShown: false }} component={MapScreen} />
+        <Stack.Screen name="AdminProf" options={{ headerShown: false }} component={AdminProf} />
+        <Stack.Screen name="Inventory" options={{ headerShown: false }} component={Inventory} />
+        <Stack.Screen name="Supplier" options={{ headerShown: false }} component={Supplier} />
       </Stack.Navigator>
     </NavigationContainer>
   );

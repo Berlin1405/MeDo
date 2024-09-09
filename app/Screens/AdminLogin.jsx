@@ -14,10 +14,6 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-
-
-  
-
   const handleLogin = () => {
     if (!email || !password) {
       setError("Email and password cannot be empty.");
@@ -29,7 +25,7 @@ const AdminLogin = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate('MainInt'); 
+        navigation.navigate('AdminProf'); 
       })
       .catch((error) => {
         setError(error.message);
@@ -103,6 +99,7 @@ const AdminLogin = () => {
           onChangeText={setHosId}
           placeholder="Enter your Hospital Id"
         />
+        
         
         <TouchableOpacity className="flex items-end p-5" onPress={handleForgotPassword}>
           <Text className="text-gray-700">Forgot Password?</Text>
