@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomTabNavigator from './BottomTabNavigator';
+import BottomTabNavigator from './BottomTabNavigator.js';
 import GetStart from './GetStart';
 import SignUp from './Signup';
 import Login from './Login';
@@ -26,7 +26,6 @@ const AppNavigation = () => {
         <Stack.Screen name="SignUp" options={{ headerShown: false }} component={SignUp} />
         <Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />
         <Stack.Screen name="BottomTabs" options={{ headerShown: false }} component={BottomTabNavigator} />
-        <Stack.Screen name="MainInt" options={{ headerShown: false }} component={BottomTabNavigator} />
         <Stack.Screen name="HospitalDetail" options={{ headerShown: false }} component={HospitalDetail} />
         <Stack.Screen name="BookingConfirmation"  options={{ headerShown: false }} component={BookingConfirmation} />
         <Stack.Screen name="BookingSuccessScreen"  options={{ headerShown: false }} component={BookingSuccessScreen} />
@@ -34,7 +33,7 @@ const AppNavigation = () => {
         <Stack.Screen name="AdminSignup" options={{ headerShown: false }} component={AdminSignup} />
         <Stack.Screen name="MapScreen" options={{ headerShown: false }} component={MapScreen} />
         <Stack.Screen name="AdminProf" options={{ headerShown: false }} component={AdminProf} />
-        <Stack.Screen name="Inventory" options={{ headerShown: false }} component={Inventory} />
+        <Stack.screen name="Inventory" options={{ headerShown: false }} component={Inventory} />
         <Stack.Screen name="Supplier" options={{ headerShown: false }} component={Supplier} />
       </Stack.Navigator>
     </NavigationContainer>
